@@ -1,18 +1,20 @@
-PRAGMA foreign_keys=on; -- Turns foreign key support in SQLite3 on
-DROP TABLE IF EXISTS owners;
-DROP TABLE IF EXISTS cats;
-DROP TABLE IF EXISTS cat_owners;
+PRAGMA foreign_keys=on;
+
 DROP TABLE IF EXISTS toys;
+DROP TABLE IF EXISTS cat_owners;
+DROP TABLE IF EXISTS cats;
+DROP TABLE IF EXISTS owners;
+
 -- Your code here
 
 CREATE TABLE owners (
-  id INT PRIMARY key,
-  first_name varchar(100),
-  last_name varchar(100)
+  id INTEGER PRIMARY key AUTOINCREMENT,
+  first_name varchar,
+  last_name varchar
 );
 
 CREATE TABLE cats (
-  id INTEGER PRIMARY key,
+  id INTEGER PRIMARY key AUTOINCREMENT,
   name VARCHAR(100),
   birth_year INTEGER,
   owner_id INTEGER,
