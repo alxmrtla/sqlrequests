@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS  owners;
+PRAGMA foreign_keys=on; -- Turns foreign key support in SQLite3 on
+DROP TABLE IF EXISTS owners;
 DROP TABLE IF EXISTS cats;
 DROP TABLE IF EXISTS cat_owners;
 DROP TABLE IF EXISTS toys;
-PRAGMA foreign_keys=on; -- Turns foreign key support in SQLite3 on
 -- Your code here
 
 CREATE TABLE owners (
@@ -15,18 +15,23 @@ CREATE TABLE cats (
   id INTEGER PRIMARY key,
   name VARCHAR(100),
   birth_year INTEGER,
-  FOREIGN KEY cat_owner REFERENCES cat_owners(cat_id)
+  owner_id INTEGER,
+  FOREIGN KEY (owner_id) REFERENCES owners(id)
 );
 
 CREATE TABLE cat_owners (
-  cat_id INTEGER FOREIGN KEY REFERENCES cats(id),
-  owner_id INTEGER FOREIGN KEY REFERENCES owners(id)
+  cat_id INTEGER,
+  owner_id INTEGER,
+  PRIMARY KEY (cat_id, owner_id),
+  FOREIGN KEY (cat_id) REFERENCES cats(id),
+  FOREIGN KEY (owner_id) REFERENCES owners(id)
 );
 
 CREATE TABLE toys(
   id INTEGER PRIMARY KEY,
   name VARCHAR(100),
-  FOREIGN KEY cat_id REFERENCES cats(id)
+  cat_id INTEGER,
+  FOREIGN KEY (cat_id) REFERENCES cats(id)
   );
 
 INSERT INTO owners
